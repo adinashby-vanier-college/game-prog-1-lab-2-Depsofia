@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="Dolphin" extends="Actor" extends-java="Actor" enable="true" strideversion="1">
+    <javadoc xml:space="preserve"/>
+    <imports>
+        <import target="java.util.*" enable="true"/>
+        <import target="greenfoot.*" enable="true"/>
+    </imports>
+    <implements/>
+    <fields/>
+    <constructors/>
+    <methods>
+        <method access="public" type="void" type-java="void" name="act" enable="true">
+            <javadoc xml:space="preserve">Act - do whatever the Dolphin wants to do. This method is called whenever the 'Act' or 'Run' button gets pressed in the environment.</javadoc>
+            <params/>
+            <throws/>
+            <body>
+                <if condition="foundCrab()" condition-java="foundCrab()" enable="true">
+                    <ifStatements>
+                        <call expression="eatCrab()" expression-java="eatCrab()" enable="true"/>
+                    </ifStatements>
+                    <else>
+                        <call expression="move(2)" expression-java="move(2)" enable="true"/>
+                    </else>
+                </if>
+                <call expression="Greenfoot.delay(2)" expression-java="Greenfoot.delay(2)" enable="true"/>
+                <call expression="move(8)" expression-java="move(8)" enable="true"/>
+                <if condition="Greenfoot.isKeyDown(&quot;down&quot;)" condition-java="Greenfoot.isKeyDown(&quot;down&quot;)" enable="true">
+                    <ifStatements>
+                        <call expression="Greenfoot.setSpeed(50)" expression-java="Greenfoot.setSpeed(50)" enable="true"/>
+                        <call expression="turn(-5)" expression-java="turn(-5)" enable="true"/>
+                    </ifStatements>
+                </if>
+                <if condition="Greenfoot.isKeyDown(&quot;up&quot;)" condition-java="Greenfoot.isKeyDown(&quot;up&quot;)" enable="true">
+                    <ifStatements>
+                        <call expression="Greenfoot.setSpeed(50)" expression-java="Greenfoot.setSpeed(50)" enable="true"/>
+                        <call expression="turn(4)" expression-java="turn(4)" enable="true"/>
+                    </ifStatements>
+                </if>
+            </body>
+        </method>
+        <method access="public" type="void" type-java="void" name="eatCrab" enable="true">
+            <javadoc xml:space="preserve">Eat a crab (if there is one)</javadoc>
+            <params/>
+            <throws/>
+            <body>
+                <variable type="Actor" type-java="Actor" name="crab" value="getOneIntersectingObject(Crab.class)" value-java="getOneIntersectingObject(Crab.class)" enable="true"/>
+                <if condition="crab!=null" condition-java="crab != null" enable="true">
+                    <ifStatements>
+                        <comment xml:space="preserve">eat the crab...</comment>
+                        <call expression="getWorld().removeObject(crab)" expression-java="getWorld().removeObject(crab)" enable="true"/>
+                    </ifStatements>
+                </if>
+            </body>
+        </method>
+        <method access="public" type="boolean" type-java="boolean" name="foundCrab" enable="true">
+            <javadoc xml:space="preserve"/>
+            <params/>
+            <throws/>
+            <body>
+                <variable type="Actor" type-java="Actor" name="crab" value="getOneObjectAtOffset(0,0,Crab.class)" value-java="getOneObjectAtOffset(0, 0, Crab.class)" enable="true"/>
+                <return value="crab!=null" value-java="crab != null" enable="true"/>
+            </body>
+        </method>
+    </methods>
+</class>
